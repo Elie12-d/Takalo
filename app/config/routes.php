@@ -28,6 +28,7 @@ $router->group('', function(Router $router) use ($app) {
 	$router->get('/home', function() use ($app) {
 		$app->render('welcome');
 	});
+	$router->get('/products', [ PagesController::class, 'products' ]);
 	
 	
 }, [ SecurityHeadersMiddleware::class ]);
