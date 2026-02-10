@@ -35,9 +35,11 @@ class UserModel {
     public function getId() {
         return $this->id;
     }
-    public function getUsers() {
-        // You could actually pull data from the database if you had one set up
-        // $users = Flight::db()->fetchAll("SELECT * FROM users");
+    public function getUserNameById($id) {
+        $sql = "SELECT name FROM users WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetchColumn();
     }
 
 }

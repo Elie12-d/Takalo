@@ -3,6 +3,7 @@
 namespace app\controllers;
 use app\models\CategoryModel;
 use app\models\ObjectModel;
+use app\models\UserModel;
 use flight\Engine;
 
 class PagesController {
@@ -63,6 +64,10 @@ class PagesController {
 	public function products() {
 		$products = new ObjectModel();
 		$objects = $products->getAllObjects();
+		$name = new UserModel();
+		foreach ($objects as $key => $object) {
+			$objects[$key]['username'] = $name->getUserNameById($object['user_id']);
+		}
 		$this->app->render('products', [ 'objects' => $objects ]);
 	}
 

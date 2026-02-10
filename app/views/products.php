@@ -11,6 +11,7 @@
     <?php foreach ($objects as $object) { ?>
         <h2><?= $object['name'] ?></h2>
         <p><?= $object['description'] ?></p>
+        <p>Propriétaire: <?= $object['username'] ?></p>
         <p>Catégorie ID: <?= $object['category_id'] ?></p>
         <p>Publié le: <?= $object['published_at'] ?></p>
         <hr>
