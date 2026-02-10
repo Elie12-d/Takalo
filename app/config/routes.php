@@ -1,7 +1,6 @@
 <?php
 
 use app\controllers\PagesController;
-use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
 
@@ -28,7 +27,7 @@ $router->group('', function(Router $router) use ($app) {
 	$router->get('/home', function() use ($app) {
 		$app->render('welcome');
 	});
-	$router->get('/products', [ PagesController::class, 'products' ]);
-	
-	
-}, [ SecurityHeadersMiddleware::class ]);
+	$router->group('/products', function () use ($app, $router) {
+		$router->get('/lists', [ PagesController::class, 'products' ]);
+	});
+});
