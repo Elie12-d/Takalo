@@ -1,0 +1,204 @@
+body {
+    background-color: rgb(238, 238, 238);
+}
+.second {
+    border-radius: 20px;
+    background-color: white;
+    margin-top: 13%;
+    margin-left: 20%;
+    margin-right: 20%;
+    height: 500px;
+    margin-bottom: 6%;
+}
+
+.titre {
+    text-align: center;
+    font-weight: bold;
+    color:rgb(176, 56, 56);
+    margin-top: 8%;
+    font-size: 22px;
+    padding-bottom: 8%;
+}
+
+.form {
+    margin-top: 7%;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.third {
+    background: -moz-linear-gradient(rgb(255, 255, 255),rgba(182, 31, 31, 0.515), rgb(100, 2, 2));
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 500px;
+}
+
+.note {
+    text-align: center;
+    color: white;
+    margin-top: -5%;
+    text-align: center;
+}
+.btn {
+    background-color: rgb(227, 99, 99);
+    border: none;
+}
+.btn:hover {
+    background-color: rgb(176, 56, 56);
+}
+
+.title h2 {
+    text-align: center;
+    font-family: 'Times New Roman';
+    margin-top: 2%;
+    margin-bottom: 2%;
+    color: #a55166;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.tableau {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.tableau th, td {
+    font-size: 25px;
+    font-family: 'Times New Roman';
+}
+
+.box {
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.formulaire {
+    font-family: 'Times New Roman';
+    border: 1px solid rgb(231, 147, 147);
+    background: -moz-linear-gradient(rgb(139, 45, 45), rgb(231, 161, 161));
+    border-radius: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.formin {
+    margin-left: 14%;
+    margin-right: 14%;
+    margin-top: 7%;
+    margin-bottom: 5%;
+}
+
+.formin h1 {
+    margin-bottom: 8%;
+}
+
+.btn_creer {
+    font-size: 22px;
+    margin-top: 7%;
+}
+
+.btn_creer input {
+    width: 30%;
+    margin-left: 35%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    color: white;
+    border: 1px solid white;
+    background: -moz-radial-gradient(rgb(221, 76, 76), white);
+    border-radius: 5px;
+}
+
+.btn_creer input:hover {
+    font-size: 25px;
+}
+
+.back {
+    margin-bottom: 1%;
+}
+
+.back a {
+    font-size: 25px;
+    margin-left: 1.5%;
+    text-decoration: none;
+    font-family: 'Times New Roman';
+    background-color: rgb(175, 64, 88);
+    color: white;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+
+.back a:hover {
+    font-weight: bold;
+}
+
+.retour {
+    margin-bottom: 1%;
+}
+
+.retour a {
+    font-size: 25px;
+    border-radius: 20px;
+    margin-left: 1.5%;
+    text-decoration: none;
+    font-family: 'Times New Roman';
+    background-color: rgb(196, 109, 128);
+    color: white;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+
+.retour a:hover {
+    font-weight: bold;
+}
+
+.link {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 10%;
+    background-color: #a55166;
+    border-radius: 20px;
+}
+
+.lien {
+    border-radius: 20px;
+    margin-left: 35%;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    background-color: white;
+    width: 30%;
+}
+
+.lien a {
+    font-family: 'Times New Roman';
+    font-weight: bold;
+    text-decoration: none;
+    padding-top: 5%;
+    padding-left: 30%;
+    padding-bottom: 5%;
+    font-size: 25px;
+    color: #a55166;
+}
+
+.note {
+    margin-top: 5%;
+}
+
+.note p {
+    font-family: 'Times New Roman';
+    font-size: 25px;
+    padding-bottom: 5%;
+}
+
+
