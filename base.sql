@@ -23,6 +23,23 @@ CREATE TABLE objects (
     published_at DATE,
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
+CREATE TABLE exchanges (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user1_id INT NOT NULL, 
+    user2_id INT NOT NULL, 
+    object1_id INT NOT NULL,
+    object2_id INT NOT NULL,
+    status VARCHAR(100) DEFAULT 'pending',
+    proposed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    responded_at DATETIME,
+    completed_at DATETIME,
+    FOREIGN KEY (user1_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (user2_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (object1_id) REFERENCES objects(id) ON DELETE CASCADE,
+    FOREIGN KEY (object2_id) REFERENCES objects(id) ON DELETE CASCADE,
+    CHECK (user1_id != user2_id),  -- Un utilisateur ne peut pas s'echanger avec lui meme
+    CHECK (object1_id != object2_id)  -- Les objets doivent etre differents
+);
 INSERT INTO users (name, email, password) VALUES
 ('Jean Dupont', 'jean.dupont@email.com', 'password123'),
 ('Marie Martin', 'marie.martin@email.com', 'marie2024'),
