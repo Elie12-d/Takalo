@@ -71,6 +71,11 @@ class PagesController {
 		$this->app->render('products', [ 'objects' => $objects ]);
 	}
 
+	public function exchange() {
+		
+		$this->app->render('exchange');
+	}
+
 	// public function getUsers() {
 	// 	// You could actually pull data from the database if you had one set up
 	// 	// $users = $this->app->db()->fetchAll("SELECT * FROM users");

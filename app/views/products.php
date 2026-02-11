@@ -14,7 +14,7 @@
         <p>Propriétaire: <?= $object['username'] ?></p>
         <p>Catégorie ID: <?= $object['category_id'] ?></p>
         <p>Publié le: <?= $object['published_at'] ?></p>
-        <button><a href="<?= BASE_URL ?>/products/exchange">Echanger</a></button>
+        <button><a href="<?= BASE_URL ?>/products/exchange/<?= $object['id'] ?>">Echanger</a></button>
         <hr>
     <?php } ?>
 </body>
