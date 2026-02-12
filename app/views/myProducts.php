@@ -1,3 +1,4 @@
+
 <section class="grid-blog-post-area blog_style2 pt-120 pb-130">
     <div class="container">
         <div class="row align-items-center justify-content-center">
@@ -24,7 +25,11 @@
                         <div class="blog-content">
                             <h5 class="blog-title"><a href="blog-details.html"><?= $object['name'] ?></a></h5>
                             <p><?= $object['description'] ?></p>
-                            <a class="btn main-btn btn-inline" href="blog-details.html">Modifier</a>
+                            <?php if(isset($otherObjectId)) { ?>
+                            <a class="btn main-btn btn-inline" href="<?= BASE_URL ?>/myproducts/edit/<?= $object['id'] ?>/<?= $otherObjectId ?>">Selectionnier</a>
+                            <?php } else { ?>
+                            <a class="btn main-btn btn-inline" href="<?= BASE_URL ?>/myproducts/edit/<?= $object['id'] ?>">Modifier</a>
+                            <?php } ?>
                         </div>
                     </div> <!-- blog card -->
                 </div>

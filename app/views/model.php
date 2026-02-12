@@ -205,6 +205,16 @@
                             </ul>
                         </div> <!-- footer link -->
                     </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="footer-link pt-35">
+                            <h4 class="footer-title mb-25">Contacts</h4>
+                            <ul>
+                                <li>elienomenjanahary35@gmail.com</li>
+                                <li>xxxxxxxxxxxxx@gmail.com</li>
+                                <li>yyyyyyyyyyyyyy@gmail.com</li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- footer widget -->

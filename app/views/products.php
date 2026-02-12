@@ -24,7 +24,7 @@
                         <div class="blog-content">
                             <h5 class="blog-title"><a href="blog-details.html"><?= $object['name'] ?></a></h5>
                             <p><?= $object['description'] ?></p>
-                            <a class="btn main-btn btn-inline" href="blog-details.html">Echager</a>
+                            <a class="btn main-btn btn-inline" href="<?= BASE_URL ?>/products/exchange/<?= $object['id'] ?>">Echager</a>
                         </div>
                     </div> <!-- blog card -->
                 </div>

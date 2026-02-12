@@ -91,9 +91,16 @@ class PagesController {
 		$this->app->render('model', [ 'objects' => $objects, 'page' => 'productsLists' ]);
 	}
 
-	public function exchange() {
-		
-		$this->app->render('model', [ 'page' => 'exchange' ]);
+	public function showMyProductsExchange() {
+		$data = $this->app->request()->data;
+		$otherObjectId = $data['id'];
+		$products = new ObjectModel();
+		$objects = $products->getObjectsByUserId($_SESSION['user_id']);
+		$name = new UserModel();
+		foreach ($objects as $key => $object) {
+			$objects[$key]['username'] = $name->getUserNameById($object['user_id']);
+		}
+		$this->app->render('model', [ 'objects' => $objects, 'otherObjectId' => $otherObjectId , 'page' => 'myProductsLists' ]);
 	}
 	public function categories() {
 		$categorie = new CategoryModel();

@@ -63,4 +63,8 @@ class ObjectModel {
         $stmt->execute([$userId]);
         return $stmt->fetchAll();
     }
+    public function exchangeObject($myObjectId, $otherObjectId) {
+        $sql = "INSERT INTO exchanges (user1_id, user2_id, object1_id, object2_id, proposed_at) VALUES (?, ?, ?, ?, NOW())";
+        
+    }
 }

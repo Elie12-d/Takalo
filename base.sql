@@ -30,7 +30,7 @@ CREATE TABLE exchanges (
     object1_id INT NOT NULL,
     object2_id INT NOT NULL,
     status VARCHAR(100) DEFAULT 'pending',
-    proposed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    proposed_at DATETIME,
     responded_at DATETIME,
     completed_at DATETIME,
     FOREIGN KEY (user1_id) REFERENCES users(id) ON DELETE CASCADE,
