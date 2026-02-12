@@ -68,7 +68,7 @@ class PagesController {
 		foreach ($objects as $key => $object) {
 			$objects[$key]['username'] = $name->getUserNameById($object['user_id']);
 		}
-		$this->app->render('products', [ 'objects' => $objects ]);
+		$this->app->render('productsLists', [ 'objects' => $objects ]);
 	}
 
 	public function exchange() {
