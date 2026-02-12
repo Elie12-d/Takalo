@@ -1,5 +1,6 @@
 <?php 
 namespace app\models;
+session_start();
 use Flight;
 class UserModel {
     private $db;
@@ -34,6 +35,20 @@ class UserModel {
     }
     public function getId() {
         return $this->id;
+    }
+    public function login($username, $password) {
+        $sql = "SELECT * FROM users WHERE email = ? OR name = ? AND password = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$username, $username, $password]);
+        $user = $stmt->fetch();
+        if($user) {
+            $_SESSION['user_id'] = $user['id'];
+            return true;
+        }
+        return false;
+    }
+    public function logout() {
+        session_destroy();
     }
     public function getUserNameById($id) {
         $sql = "SELECT name FROM users WHERE id = ?";

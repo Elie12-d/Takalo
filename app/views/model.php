@@ -104,7 +104,7 @@
                                 </ul>
                             </div> <!-- navbar collapse -->
                             <div class="button header-button">
-                                <a href="javascript:void(0)" class="btn main-btn btn-inline">Log Out</a>
+                                <a href="<?= BASE_URL ?>/logout" class="btn main-btn btn-inline">Log Out</a>
                             </div>
                         </nav> <!-- navbar -->
                     </div>

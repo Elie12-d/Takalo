@@ -14,6 +14,25 @@ class PagesController {
 		$this->app = $app;
 	}
 
+	public function login() {
+		$data = $this->app->request()->data;
+		if(empty($data['username']) || empty($data['password'])) {
+			$this->app->render('login');
+			return;
+		}
+		$user = new UserModel();
+		if($user->login($data['username'], $data['password'])) {
+			$this->app->redirect(BASE_URL . '/products/lists');
+		} else {
+			$this->app->render('login', [ 'error' => 'Invalid username or password' ]);
+		}
+	}
+	public function logout() {
+		$user = new UserModel();
+		$user->logout();
+		$this->app->redirect(BASE_URL . '/login');
+	}
+
 	public function addCategory() {
 		$data = $this->app->request()->data;
 		if(empty($data['nom']) || empty($data['description'])) {

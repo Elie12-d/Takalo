@@ -13,8 +13,10 @@ use flight\net\Router;
 $router->group('', function(Router $router) use ($app) {
 
 	$router->get('/', function() use ($app) {
-		$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);
+		$app->render('login');
 	});
+	$router->post('/login', [ PagesController::class, 'login' ]);
+	$router->get('/logout', [ PagesController::class, 'logout' ]);
 
 	$router->group('/category', function() use ($router) {
 		$router->get('/add', [ PagesController::class, 'addCategory' ]);
