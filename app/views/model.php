@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -6,29 +7,29 @@
     <meta name="keywords" content="Bootstrap, Consulting Template, Landing page, Template, Registration, Landing">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="GridTemplate">
-    
+
     <!--====== Title ======-->
     <title>Takalo - Takalo</title>
-    
+
     <!--====== Favicon Icon ======-->
     <link rel="shortcut icon" href="<?= BASE_URL ?>/assets/images/normal/favicon.svg" type="image/png">
-    
+
     <!--====== Bootstrap css ======-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/bootstrap.min.css">
     <!--====== flaticon Icons css ======-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/fonts/flaticon.css">
-    
+
     <!--====== animate CSS ======-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/pricing-tab.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/animate.css">
     <!--====== nice-select CSS ======-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/nice-select.css">
-    
+
     <!--====== Slick CSS ======-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/slick.css">
     <!--====== Default css ======-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/default.css">
-    
+
     <!--====== Style css ======-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
 </head>
@@ -76,74 +77,20 @@
                                         <a class=" active dd-menu collapsed" href="javascript:void(0)"
                                             data-bs-toggle="collapse" data-bs-target="#submenu-list1"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
-                                            aria-label="Toggle navigation">Home</a>
-                                        <ul class="sub-menu collapse" id="submenu-list1">
-                                            <li class="nav-item active"><a href="index.html">Home Default</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Home Version 2</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Home Version 3</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class=" dd-menu collapsed" href="javascript:void(0)"
-                                            data-bs-toggle="collapse" data-bs-target="#submenu-ads"
-                                            aria-controls="navbarSupportedContent" aria-expanded="false"
-                                            aria-label="Toggle navigation">Browse Ads</a>
-                                        <ul class="sub-menu collapse" id="submenu-ads">
-                                            <li class="nav-item"><a href="javascript:void(0)">Browse Grid</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Browse Standard</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Browse Details</a></li>
-                                        </ul>
+                                            aria-label="Toggle navigation"></a>
+                                        <a href="<?= BASE_URL ?>/products/lists">Home</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class=" dd-menu collapsed" href="javascript:void(0)"
                                             data-bs-toggle="collapse" data-bs-target="#submenu-list2"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
-                                            aria-label="Toggle navigation">Categories</a>
-                                        <ul class="sub-menu collapse" id="submenu-list2">
-                                            <li class="nav-item"><a href="javascript:void(0)">All Categories</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Categories Details</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class=" dd-menu collapsed" href="javascript:void(0)"
-                                            data-bs-toggle="collapse" data-bs-target="#submenu-list3"
-                                            aria-controls="navbarSupportedContent" aria-expanded="false"
-                                            aria-label="Toggle navigation">Pages</a>
-                                        <ul class="sub-menu collapse" id="submenu-list3">
-                                            <li class="nav-item"><a href="about.html">About Us</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Our Stores</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Stores Details</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Faq's</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Pricing Table</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Login Page</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Sign Up </a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class=" dd-menu collapsed" href="javascript:void(0)"
-                                            data-bs-toggle="collapse" data-bs-target="#submenu-list4"
-                                            aria-controls="navbarSupportedContent" aria-expanded="false"
-                                            aria-label="Toggle navigation">Blog</a>
-                                        <ul class="sub-menu collapse" id="submenu-list4">
-                                            <li class="nav-item"><a href="blog.html">Blog Grid</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Blog Standard</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Blog Details</a></li>
-                                            <li class="nav-item"><a href="404.html">404 Error</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0)">Contact Us</a></li>
-                                        </ul>
+                                            aria-label="Toggle navigation"></a>
+                                        <a href="<?= BASE_URL ?>/categories/lists">Categories</a>
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
-                            <div class="login-button">
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0)"><i class="flaticon-user"></i> Login/Register</a>
-                                    </li>
-                                </ul>
-                            </div>
                             <div class="button header-button">
-                                <a href="javascript:void(0)" class="btn main-btn btn-inline">Post Your Ads</a>
+                                <a href="javascript:void(0)" class="btn main-btn btn-inline">Log Out</a>
                             </div>
                         </nav> <!-- navbar -->
                     </div>
@@ -214,46 +161,24 @@
     <!-- End Hero Area -->
 
     <!--====== UPCOMING BLOG POST PART START ======-->
-    <section class="grid-blog-post-area blog_style2 pt-120 pb-130">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-lg-8">
-                    <div class="section-title text-center">
-                        <h3 class="title wow fadeInUp" data-wow-delay=".2s">Listes des produits</h3>
-                        <p class="wow fadeInUp" data-wow-delay=".4s">Vous pouvez les echanger avec les votre <br> en cliquant sur le bouton echanger </p>
-                    </div> <!-- section title -->
-                </div>
-            </div> <!-- row -->
-            <div class="row">
-                <?php foreach ($objects as $object) { ?>
-                <div class="col-lg-4">
-                    <div class="blog-card mt-30 mb-30 wow fadeInUp" data-wow-delay=".2s">
-                        <div class="blog-image">
-                            <img src="<?= BASE_URL ?>/assets/images/blog/1.jpg" alt="post">
-                        </div>
-                        <div class="post-meta py-3">
-                            <ul class="list-unstyled">
-                                <li><a href=""><i class="flaticon-user mx-2 ml-0"></i><?= $object['username'] ?></a></li>
-                                <li><a href=""><i class="flaticon-calendar mx-2"></i><?= $object['published_at'] ?></a></li>
-                            </ul>
-                        </div>
-                        <div class="blog-content">
-                            <h5 class="blog-title"><a href="blog-details.html"><?= $object['name'] ?></a></h5>
-                            <p><?= $object['description'] ?></p>
-                            <a class="btn main-btn btn-inline" href="blog-details.html">Echager</a>
-                        </div>
-                    </div> <!-- blog card -->
-                </div>
-                <?php } ?>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
+    <?php
+    define('VIEWS_PATH', realpath(__DIR__ . '/../views'));
+    $allowedPages = [
+        'productsLists' => 'products.php',
+        'exchange' => 'exchange.php',
+        'categoriesLists' => 'categories.php',
+    ];
+    if (isset($allowedPages[$page])) {
+        $file = VIEWS_PATH . '/' . $allowedPages[$page];
+        include $file;
+    }
+    ?>
     <!--====== UPCOMING BLOG POST PART ENDS ======-->
 
     <!--====== FOOTER PART START ======-->
     <footer class="footer-area">
         <div class="footer-widget pb-80">
-            
+
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-sm-12">
@@ -336,4 +261,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -68,12 +68,17 @@ class PagesController {
 		foreach ($objects as $key => $object) {
 			$objects[$key]['username'] = $name->getUserNameById($object['user_id']);
 		}
-		$this->app->render('productsLists', [ 'objects' => $objects ]);
+		$this->app->render('model', [ 'objects' => $objects, 'page' => 'productsLists' ]);
 	}
 
 	public function exchange() {
 		
 		$this->app->render('exchange');
+	}
+	public function categories() {
+		$categorie = new CategoryModel();
+		$categories = $categorie->getAllCategories();
+		$this->app->render('model', [ 'categories' => $categories, 'page' => 'categories' ]);
 	}
 
 	// public function getUsers() {
