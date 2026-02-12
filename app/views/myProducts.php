@@ -3,8 +3,8 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-lg-8">
                 <div class="section-title text-center">
-                    <h3 class="title wow fadeInUp" data-wow-delay=".2s">Listes des produits</h3>
-                    <p class="wow fadeInUp" data-wow-delay=".4s">Vous pouvez les echanger avec les votre <br> en cliquant sur le bouton echanger </p>
+                    <h3 class="title wow fadeInUp" data-wow-delay=".2s">Listes de mes produits</h3>
+                    <p class="wow fadeInUp" data-wow-delay=".4s">Vous pouvez les modifier en cliquant sur <br> le bouton modifier </p>
                 </div> <!-- section title -->
             </div>
         </div> <!-- row -->

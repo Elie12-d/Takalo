@@ -83,7 +83,7 @@ class PagesController {
 	}
 	public function products() {
 		$products = new ObjectModel();
-		$objects = $products->getAllObjects();
+		$objects = $products->getAllObjects($_SESSION['user_id']);
 		$name = new UserModel();
 		foreach ($objects as $key => $object) {
 			$objects[$key]['username'] = $name->getUserNameById($object['user_id']);

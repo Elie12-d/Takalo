@@ -51,10 +51,10 @@ class ObjectModel {
     public function getPublishedDate() {
         return $this->publishedDate;
     }
-    public function getAllObjects() {
-        $sql = "SELECT * FROM objects";
+    public function getAllObjects($userId) {
+        $sql = "SELECT * FROM objects WHERE user_id != ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute();
+        $stmt->execute([$userId]);
         return $stmt->fetchAll();
     }
     public function getObjectsByUserId($userId) {
