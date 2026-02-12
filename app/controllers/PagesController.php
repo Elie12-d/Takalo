@@ -1,42 +1,49 @@
 <?php
 
 namespace app\controllers;
+
 session_start();
+
 use app\models\CategoryModel;
 use app\models\ObjectModel;
 use app\models\UserModel;
 use flight\Engine;
 
-class PagesController {
+class PagesController
+{
 
 	protected Engine $app;
 
-	public function __construct($app) {
+	public function __construct($app)
+	{
 		$this->app = $app;
 	}
 
-	public function login() {
+	public function login()
+	{
 		$data = $this->app->request()->data;
-		if(empty($data['username']) || empty($data['password'])) {
+		if (empty($data['username']) || empty($data['password'])) {
 			$this->app->render('login');
 			return;
 		}
 		$user = new UserModel();
-		if($user->login($data['username'], $data['password'])) {
+		if ($user->login($data['username'], $data['password'])) {
 			$this->app->redirect(BASE_URL . '/products/lists');
 		} else {
-			$this->app->render('login', [ 'error' => 'Invalid username or password' ]);
+			$this->app->render('login', ['error' => 'Invalid username or password']);
 		}
 	}
-	public function logout() {
+	public function logout()
+	{
 		$user = new UserModel();
 		$user->logout();
 		$this->app->redirect(BASE_URL . '/');
 	}
 
-	public function addCategory() {
+	public function addCategory()
+	{
 		$data = $this->app->request()->data;
-		if(empty($data['nom']) || empty($data['description'])) {
+		if (empty($data['nom']) || empty($data['description'])) {
 			$this->app->render('addCategoryForm');
 			return;
 		}
@@ -48,50 +55,56 @@ class PagesController {
 		$this->app->redirect(BASE_URL . '/category/lists');
 	}
 
-	public function deleteCategory($id) {
+	public function deleteCategory($id)
+	{
 		$categorie = new CategoryModel();
 		$categorie->setId($id);
 		$categorie->deleteCategory();
 		$this->app->redirect(BASE_URL . '/category/lists');
 	}
-	public function updateCategoryForm($id) {
+	public function updateCategoryForm($id)
+	{
 		$categorie = new CategoryModel();
 		$categorie->setId($id);
 		$category = $categorie->getCategorieById(id: $id);
-		$this->app->render('updateCategoryForm', [ 'categorie' => $category ]);
+		$this->app->render('updateCategoryForm', ['categorie' => $category]);
 	}
 
-	public function updateCategory() {
+	public function updateCategory()
+	{
 		$data = $this->app->request()->data;
 		$id = $data['id'];
-        $name = $data['name'];
-        $description = $data['description'];
-        $status = $data['status'];
+		$name = $data['name'];
+		$description = $data['description'];
+		$status = $data['status'];
 
 		$categorie = new CategoryModel();
-        $categorie->setId($id);
-        $categorie->setName($name);
-        $categorie->setDescription($description);
-        $categorie->setStatus($status);
+		$categorie->setId($id);
+		$categorie->setName($name);
+		$categorie->setDescription($description);
+		$categorie->setStatus($status);
 		$categorie->updateCategory();
 		$this->app->redirect(BASE_URL . '/category/lists');
 	}
-	public function toLists() {
+	public function toLists()
+	{
 		$categorie = new CategoryModel();
 		$categories = $categorie->getAllCategories();
-		$this->app->render('lists', [ 'categories' => $categories ]);
+		$this->app->render('lists', ['categories' => $categories]);
 	}
-	public function products() {
+	public function products()
+	{
 		$products = new ObjectModel();
 		$objects = $products->getAllObjects($_SESSION['user_id']);
 		$name = new UserModel();
 		foreach ($objects as $key => $object) {
 			$objects[$key]['username'] = $name->getUserNameById($object['user_id']);
 		}
-		$this->app->render('model', [ 'objects' => $objects, 'page' => 'productsLists' ]);
+		$this->app->render('model', ['objects' => $objects, 'page' => 'productsLists']);
 	}
 
-	public function showMyProductsExchange() {
+	public function showMyProductsExchange()
+	{
 		$data = $this->app->request()->data;
 		$otherObjectId = $data['id'];
 		$products = new ObjectModel();
@@ -100,36 +113,41 @@ class PagesController {
 		foreach ($objects as $key => $object) {
 			$objects[$key]['username'] = $name->getUserNameById($object['user_id']);
 		}
-		$this->app->render('model', [ 'objects' => $objects, 'otherObjectId' => $otherObjectId , 'page' => 'myProductsLists' ]);
+		$this->app->render('model', ['objects' => $objects, 'otherObjectId' => $otherObjectId, 'page' => 'myProductsLists']);
 	}
-	public function categories() {
+	public function categories()
+	{
 		$categorie = new CategoryModel();
 		$categories = $categorie->getAllCategories();
-		$this->app->render('model', [ 'categories' => $categories, 'page' => 'categoriesLists' ]);
+		$this->app->render('model', ['categories' => $categories, 'page' => 'categoriesLists']);
 	}
-	public function myProducts() {
+	public function myProducts(){
 		$products = new ObjectModel();
 		$objects = $products->getObjectsByUserId($_SESSION['user_id']);
 		$name = new UserModel();
 		foreach ($objects as $key => $object) {
 			$objects[$key]['username'] = $name->getUserNameById($object['user_id']);
 		}
-		$this->app->render('model', [ 'objects' => $objects, 'page' => 'myProductsLists' ]);
+		// Vérifier si c'est une requête AJAX
+		if (
+			!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+			strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
+		) {
+
+			// Retourner en JSON pour les requêtes AJAX
+			header('Content-Type: application/json');
+			echo json_encode([
+				'success' => true,
+				'objects' => $objects
+			]);
+			exit;
+		}
+
+		// Sinon, afficher la vue normale
+		$this->app->render('model', [
+			'objects' => $objects,
+			'page' => 'myProductsLists'
+		]);
 	}
-
-	// public function getUsers() {
-	// 	// You could actually pull data from the database if you had one set up
-	// 	// $users = $this->app->db()->fetchAll("SELECT * FROM users");
-	// 	$users = [
-	// 		[ 'id' => 1, 'name' => 'Bob Jones', 'email' => 'bob@example.com' ],
-	// 		[ 'id' => 2, 'name' => 'Bob Smith', 'email' => 'bsmith@example.com' ],
-	// 		[ 'id' => 3, 'name' => 'Suzy Johnson', 'email' => 'suzy@example.com' ],
-	// 	];
-
-	// 	// You actually could overwrite the json() method if you just wanted to
-	// 	// to ->json($users); and it would auto set pretty print for you.
-	// 	// https://flightphp.com/learn#overriding
-	// 	$this->app->json($users, 200, true, 'utf-8', JSON_PRETTY_PRINT);
-	// }
 
 }

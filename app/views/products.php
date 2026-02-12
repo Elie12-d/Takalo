@@ -1,15 +1,15 @@
 <section class="grid-blog-post-area blog_style2 pt-120 pb-130">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-lg-8">
-                    <div class="section-title text-center">
-                        <h3 class="title wow fadeInUp" data-wow-delay=".2s">Listes des produits</h3>
-                        <p class="wow fadeInUp" data-wow-delay=".4s">Vous pouvez les echanger avec les votre <br> en cliquant sur le bouton echanger </p>
-                    </div> <!-- section title -->
-                </div>
-            </div> <!-- row -->
-            <div class="row">
-                <?php foreach ($objects as $object) { ?>
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-title text-center">
+                    <h3 class="title wow fadeInUp" data-wow-delay=".2s">Listes des produits</h3>
+                    <p class="wow fadeInUp" data-wow-delay=".4s">Vous pouvez les echanger avec les votre <br> en cliquant sur le bouton echanger </p>
+                </div> <!-- section title -->
+            </div>
+        </div> <!-- row -->
+        <div class="row">
+            <?php foreach ($objects as $object) { ?>
                 <div class="col-lg-4">
                     <div class="blog-card mt-30 mb-30 wow fadeInUp" data-wow-delay=".2s">
                         <div class="blog-image">
@@ -28,7 +28,8 @@
                         </div>
                     </div> <!-- blog card -->
                 </div>
-                <?php } ?>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
+            <?php } ?>
+        </div> <!-- row -->
+    </div> <!-- container -->
+</section>
+<script src="<?= BASE_URL ?>/assets/js/exchangePopUp.js"></script>
