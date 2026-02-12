@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -181,6 +180,7 @@
         'productsLists' => 'products.php',
         'exchange' => 'exchange.php',
         'categoriesLists' => 'categories.php',
+        'myProductsLists' => 'myProducts.php'
     ];
     if (isset($allowedPages[$page])) {
         $file = VIEWS_PATH . '/' . $allowedPages[$page];

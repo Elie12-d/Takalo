@@ -1,6 +1,5 @@
 <?php 
 namespace app\models;
-session_start();
 use Flight;
 class UserModel {
     private $db;

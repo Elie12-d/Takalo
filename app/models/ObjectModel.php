@@ -57,4 +57,10 @@ class ObjectModel {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public function getObjectsByUserId($userId) {
+        $sql = "SELECT * FROM objects WHERE user_id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll();
+    }
 }

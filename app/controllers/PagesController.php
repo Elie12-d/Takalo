@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+session_start();
 use app\models\CategoryModel;
 use app\models\ObjectModel;
 use app\models\UserModel;
@@ -98,6 +99,15 @@ class PagesController {
 		$categorie = new CategoryModel();
 		$categories = $categorie->getAllCategories();
 		$this->app->render('model', [ 'categories' => $categories, 'page' => 'categoriesLists' ]);
+	}
+	public function myProducts() {
+		$products = new ObjectModel();
+		$objects = $products->getObjectsByUserId($_SESSION['user_id']);
+		$name = new UserModel();
+		foreach ($objects as $key => $object) {
+			$objects[$key]['username'] = $name->getUserNameById($object['user_id']);
+		}
+		$this->app->render('model', [ 'objects' => $objects, 'page' => 'myProductsLists' ]);
 	}
 
 	// public function getUsers() {

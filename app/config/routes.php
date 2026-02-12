@@ -36,4 +36,7 @@ $router->group('', function(Router $router) use ($app) {
 	$router->group('/categories', function () use ($app, $router) {
 		$router->get('/lists', [ PagesController::class, 'categories' ]);
 	});
+	$router->group('/myproducts', function () use ($app, $router) {
+		$router->get('/lists', [ PagesController::class, 'myProducts' ]);
+	});
 });
