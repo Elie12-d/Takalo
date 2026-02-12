@@ -30,7 +30,7 @@ class PagesController {
 	public function logout() {
 		$user = new UserModel();
 		$user->logout();
-		$this->app->redirect(BASE_URL . '/login');
+		$this->app->redirect(BASE_URL . '/');
 	}
 
 	public function addCategory() {
