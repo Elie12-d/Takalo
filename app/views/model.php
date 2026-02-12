@@ -78,7 +78,7 @@
                                             data-bs-toggle="collapse" data-bs-target="#submenu-list1"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
                                             aria-label="Toggle navigation"></a>
-                                        <a href="<?= BASE_URL ?>/products/lists">Home</a>
+                                        <a href="<?= BASE_URL ?>/products/lists">Accueil</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class=" dd-menu collapsed" href="javascript:void(0)"
@@ -86,6 +86,20 @@
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
                                             aria-label="Toggle navigation"></a>
                                         <a href="<?= BASE_URL ?>/categories/lists">Categories</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class=" dd-menu collapsed" href="javascript:void(0)"
+                                            data-bs-toggle="collapse" data-bs-target="#submenu-list2"
+                                            aria-controls="navbarSupportedContent" aria-expanded="false"
+                                            aria-label="Toggle navigation"></a>
+                                        <a href="<?= BASE_URL ?>/myproducts/lists">Mes Objets</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class=" dd-menu collapsed" href="javascript:void(0)"
+                                            data-bs-toggle="collapse" data-bs-target="#submenu-list2"
+                                            aria-controls="navbarSupportedContent" aria-expanded="false"
+                                            aria-label="Toggle navigation"></a>
+                                        <a href="<?= BASE_URL ?>/categories/lists">Listes des propositions</a>
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
