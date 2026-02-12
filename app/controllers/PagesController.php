@@ -73,12 +73,12 @@ class PagesController {
 
 	public function exchange() {
 		
-		$this->app->render('exchange');
+		$this->app->render('model', [ 'page' => 'exchange' ]);
 	}
 	public function categories() {
 		$categorie = new CategoryModel();
 		$categories = $categorie->getAllCategories();
-		$this->app->render('model', [ 'categories' => $categories, 'page' => 'categories' ]);
+		$this->app->render('model', [ 'categories' => $categories, 'page' => 'categoriesLists' ]);
 	}
 
 	// public function getUsers() {
