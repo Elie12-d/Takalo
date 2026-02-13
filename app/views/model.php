@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
 </head>
 
-<body>
+<body data-current-user-id="<?= $_SESSION['user_id'] ?>">
     <!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please

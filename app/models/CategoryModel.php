@@ -71,8 +71,7 @@ class CategoryModel
                 $this->getId()
             ]);
                 return $success;
-        } catch (Exception $e) {
-            error_log("Exception dans updateCategory: " . $e->getMessage());
+        } catch (\PDOException $e) {
             return false;
         }
     }

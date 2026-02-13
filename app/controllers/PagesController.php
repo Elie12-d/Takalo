@@ -103,17 +103,28 @@ class PagesController
 		$this->app->render('model', ['objects' => $objects, 'page' => 'productsLists']);
 	}
 
-	public function showMyProductsExchange()
+	public function exchange()
 	{
 		$data = $this->app->request()->data;
-		$otherObjectId = $data['id'];
+		$objectId1 = $data['requested_product_id'];
+		$objectId2 = $data['offered_product_id'];
 		$products = new ObjectModel();
-		$objects = $products->getObjectsByUserId($_SESSION['user_id']);
-		$name = new UserModel();
-		foreach ($objects as $key => $object) {
-			$objects[$key]['username'] = $name->getUserNameById($object['user_id']);
+		$idUser1 = $products->getById($objectId1);
+		$idUser2 = $products->getById($objectId2);
+		$result = $products->proposeExchange($objectId1, $objectId2, $idUser1['user_id'], $idUser2['user_id']);
+		if($result) {
+			header('Content-Type: application/json');
+			echo json_encode([
+				'success' => true
+			]);
+			exit;
+		} else {
+			header('Content-Type: application/json');
+			echo json_encode([
+				'success' => false
+			]);
+			exit;
 		}
-		$this->app->render('model', ['objects' => $objects, 'otherObjectId' => $otherObjectId, 'page' => 'myProductsLists']);
 	}
 	public function categories()
 	{

@@ -31,7 +31,7 @@ $router->group('', function(Router $router) use ($app) {
 	});
 	$router->group('/products', function () use ($app, $router) {
 		$router->get('/lists', [ PagesController::class, 'products' ]);
-		$router->get('/exchange/@id:[0-9]+', [ PagesController::class, 'showMyProductsExchange']);
+		$router->get('/exchange/confirm', [ PagesController::class, 'exchange']);
 	});
 	$router->group('/categories', function () use ($app, $router) {
 		$router->get('/lists', [ PagesController::class, 'categories' ]);

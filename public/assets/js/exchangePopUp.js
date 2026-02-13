@@ -13,17 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const href = this.getAttribute('href');
             const currentProductId = href.split('/').pop();
             
-            // Récupérer le nom du produit actuel
-            const productCard = this.closest('.blog-card');
-            const currentProductName = productCard.querySelector('.blog-title a').textContent;
-            
-            // Ouvrir la popup de sélection avec les produits de l'utilisateur connecté
-            openProductSelectionPopup(currentProductId, currentProductName);
+            // Ouvrir la popup de sélection avec l'ID du produit
+            openProductSelectionPopup(currentProductId);
         });
     });
     
     // Fonction pour ouvrir la popup de sélection des produits
-    async function openProductSelectionPopup(currentProductId, currentProductName) {
+    async function openProductSelectionPopup(currentProductId) {
         
         // Afficher un loader pendant le chargement
         const overlay = createPopupOverlay();
@@ -60,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
             header.querySelector('button').onclick = () => overlay.remove();
             popup.appendChild(header);
             
-            // Ajouter les informations du produit actuel
-            const currentProductInfo = createCurrentProductInfo(currentProductName, currentProductId);
+            // Ajouter les informations du produit actuel (uniquement ID)
+            const currentProductInfo = createCurrentProductInfo(currentProductId);
             popup.appendChild(currentProductInfo);
             
             // Titre de la liste
@@ -96,7 +92,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (userProducts.length > 0) {
                     userProducts.forEach(product => {
-                        const productItem = createProductItem(product, currentProductId, currentProductName, overlay);
+                        const productItem = createProductItem(
+                            product, 
+                            currentProductId, 
+                            overlay
+                        );
                         productList.appendChild(productItem);
                     });
                 } else {
@@ -339,8 +339,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return header;
     }
     
-    // Fonction pour créer les informations du produit actuel
-    function createCurrentProductInfo(productName, productId) {
+    // Fonction pour créer les informations du produit actuel (UNIQUEMENT ID)
+    function createCurrentProductInfo(productId) {
         const info = document.createElement('div');
         info.style.cssText = `
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -352,15 +352,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         info.innerHTML = `
             <div style="font-size: 14px; opacity: 0.9; margin-bottom: 5px;">Produit à échanger</div>
-            <div style="font-weight: bold; font-size: 18px; margin-bottom: 5px;">${productName}</div>
-            <div style="font-size: 13px; opacity: 0.9;">ID: ${productId}</div>
+            <div style="font-weight: bold; font-size: 18px; margin-bottom: 5px;">ID Produit: ${productId}</div>
+            <div style="font-size: 13px; opacity: 0.9;">Sélectionnez un de vos produits pour échanger</div>
         `;
         
         return info;
     }
     
-    // Fonction pour créer un élément produit
-    function createProductItem(product, currentProductId, currentProductName, overlay) {
+    // Fonction pour créer un élément produit (simplifié)
+    function createProductItem(product, currentProductId, overlay) {
         const productItem = document.createElement('div');
         productItem.className = 'user-product-item';
         productItem.style.cssText = `
@@ -389,24 +389,16 @@ document.addEventListener('DOMContentLoaded', function() {
             productItem.style.boxShadow = 'none';
         };
         
-        // Informations du produit
+        // Informations du produit (simplifiées)
         const productInfo = document.createElement('div');
         productInfo.style.flex = '1';
-        
-        // Formater la date si elle existe
-        const publishDate = product.published_at ? 
-            `<span style="margin-left: 10px; color: #999;">📅 ${product.published_at}</span>` : '';
         
         productInfo.innerHTML = `
             <div style="display: flex; align-items: center; margin-bottom: 5px;">
                 <span style="font-weight: bold; color: #333; font-size: 16px;">${product.name}</span>
             </div>
             <div style="font-size: 13px; color: #666; margin-bottom: 3px;">
-                ${product.description || 'Aucune description'}
-            </div>
-            <div style="display: flex; align-items: center; font-size: 12px;">
-                <span style="color: #999;">ID: ${product.id}</span>
-                ${publishDate}
+                ID: ${product.id}
             </div>
         `;
         
@@ -433,16 +425,27 @@ document.addEventListener('DOMContentLoaded', function() {
             selectButton.style.transform = 'scale(1)';
         };
         
-        // Action de sélection
+        // Action de sélection - ENVOI UNIQUEMENT DES IDS
         selectButton.onclick = (e) => {
             e.stopPropagation();
-            submitExchange(currentProductId, product.id.toString(), currentProductName, product.name);
+            
+            // Envoyer uniquement les deux IDs
+            submitExchange(
+                currentProductId,  // ID du produit à échanger
+                product.id.toString() // ID du produit proposé
+            );
+            
             overlay.remove();
         };
         
         // Clic sur l'ensemble de l'élément
         productItem.onclick = () => {
-            submitExchange(currentProductId, product.id.toString(), currentProductName, product.name);
+            // Même action que le bouton
+            submitExchange(
+                currentProductId,  // ID du produit à échanger
+                product.id.toString() // ID du produit proposé
+            );
+            
             overlay.remove();
         };
         
@@ -470,15 +473,17 @@ document.addEventListener('DOMContentLoaded', function() {
         return noProducts;
     }
     
-    // Fonction pour envoyer les deux IDs
-    function submitExchange(productId1, productId2, productName1, productName2) {
-        // Confirmation de l'échange
-        const confirmExchange = confirm(
-            `Confirmez-vous l'échange de votre produit :\n\n` +
-            `"${productName1}" (ID: ${productId1})\n\n` +
-            `Contre :\n\n` +
-            `"${productName2}" (ID: ${productId2}) ?`
-        );
+    // Fonction pour envoyer uniquement les deux IDs d'échange
+    function submitExchange(currentProductId, proposedProductId) {
+        
+        // Message de confirmation simplifié
+        const confirmMessage = 
+            `🔁 CONFIRMATION D'ÉCHANGE\n\n` +
+            `📤 ID Produit proposé: ${proposedProductId}\n` +
+            `📥 ID Produit demandé: ${currentProductId}\n\n` +
+            `Confirmez-vous cet échange ?`;
+        
+        const confirmExchange = confirm(confirmMessage);
         
         if (confirmExchange) {
             
@@ -499,18 +504,20 @@ document.addEventListener('DOMContentLoaded', function() {
             loadingToast.textContent = 'Traitement de l\'échange en cours...';
             document.body.appendChild(loadingToast);
             
-            // Envoyer les données via fetch
-            fetch('/products/exchange/confirm', {
-                method: 'POST',
+            // PRÉPARATION DES DONNÉES SIMPLIFIÉES - UNIQUEMENT LES IDS
+            const payload = {
+                requested_product_id: currentProductId,  // ID du produit demandé
+                offered_product_id: proposedProductId    // ID du produit proposé
+            };
+            
+            // Envoi uniquement des IDs
+            fetch(`/products/exchange/confirm?requested_product_id=${currentProductId}&offered_product_id=${proposedProductId}`, {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest'
                 },
-                body: JSON.stringify({
-                    product_id_1: productId1,
-                    product_id_2: productId2,
-                    timestamp: new Date().toISOString()
-                })
+                // body: JSON.stringify(payload)
             })
             .then(response => {
                 if (!response.ok) {
@@ -535,14 +542,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
                     z-index: 10000;
                     animation: slideInRight 0.3s ease;
-                    max-width: 350px;
+                    max-width: 400px;
                 `;
                 successToast.innerHTML = `
-                    <div style="font-size: 24px; margin-bottom: 10px;">✅</div>
-                    <div style="font-weight: bold; margin-bottom: 5px;">Échange initié avec succès !</div>
+                    <div style="font-size: 24px; margin-bottom: 10px;">✅ Échange initié !</div>
                     <div style="font-size: 13px; opacity: 0.9;">
-                        Produit 1: ${productName1}<br>
-                        Produit 2: ${productName2}
+                        <strong>ID produit proposé:</strong> ${proposedProductId}<br>
+                        <strong>ID produit demandé:</strong> ${currentProductId}<br>
+                        <strong>ID Demande:</strong> ${Date.now().toString().slice(-6)}
                     </div>
                 `;
                 document.body.appendChild(successToast);
@@ -553,13 +560,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(() => successToast.remove(), 300);
                 }, 5000);
                 
-                console.log('Échange envoyé:', { 
-                    product_1: { id: productId1, name: productName1 },
-                    product_2: { id: productId2, name: productName2 }
-                });
+                // Log simplifié
+                console.log('📦 IDS D\'ÉCHANGE ENVOYÉS:', payload);
+                
             })
             .catch(error => {
-                console.error('Erreur:', error);
+                console.error('❌ Erreur échange:', error);
                 
                 // Retirer le toast de chargement
                 loadingToast.remove();

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Flight;
+use PDO;
 
 class ObjectModel {
     private $db;
@@ -63,8 +64,26 @@ class ObjectModel {
         $stmt->execute([$userId]);
         return $stmt->fetchAll();
     }
-    public function exchangeObject($myObjectId, $otherObjectId) {
-        $sql = "INSERT INTO exchanges (user1_id, user2_id, object1_id, object2_id, proposed_at) VALUES (?, ?, ?, ?, NOW())";
-        
+    public function proposeExchange($objectId1, $objectId2, $userId1, $userId2) {
+        // Flight::json([ 'message' => 'Proposition d\'échange envoyée avec succès.'.$userId1.' '.$userId2.' '.$objectId1.' '.$objectId2 ]);
+        try {
+            $sql = "INSERT INTO exchanges(user1_id, user2_id, object1_id, object2_id, proposed_at) VALUES (?, ?, ?, ?, NOW())";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(1, $userId1, PDO::PARAM_INT);
+            $stmt->bindParam(2, $userId2, PDO::PARAM_INT);
+            $stmt->bindParam(3, $objectId1, PDO::PARAM_INT);
+            $stmt->bindParam(4, $objectId2, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (\PDOException $e) {
+            return false;
+        }
+        return true;
+    }
+    public function getById($id) {
+        $sql = "SELECT * FROM objects WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(1,$id);
+         $stmt->execute();
+        return $stmt->fetch();
     }
 }
