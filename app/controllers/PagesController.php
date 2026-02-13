@@ -105,17 +105,22 @@ class PagesController
 
 	public function exchange()
 	{
-		$data = $this->app->request()->data;
+		$data = $this->app->request()->query;
 		$objectId1 = $data['requested_product_id'];
 		$objectId2 = $data['offered_product_id'];
 		$products = new ObjectModel();
-		$idUser1 = $products->getById($objectId1);
-		$idUser2 = $products->getById($objectId2);
-		$result = $products->proposeExchange($objectId1, $objectId2, $idUser1['user_id'], $idUser2['user_id']);
-		if($result) {
+		$idUser1 = $products->getUserIdById($objectId1);
+		$idUser2 = $products->getUserIdById($objectId2);
+		$result1 = $products->proposeExchange($idUser1, $idUser2, $objectId1, $objectId2);
+		$result2 = $products->exchangeObjects($objectId1, $objectId2);
+		if ($result1 && $result2) {
 			header('Content-Type: application/json');
 			echo json_encode([
-				'success' => true
+				'success' => true,
+				'user1_id' => $idUser1,
+				'user2_id' => $idUser2,
+				'object1_id' => $objectId1,
+				'object2_id' => $objectId2
 			]);
 			exit;
 		} else {
@@ -132,7 +137,8 @@ class PagesController
 		$categories = $categorie->getAllCategories();
 		$this->app->render('model', ['categories' => $categories, 'page' => 'categoriesLists']);
 	}
-	public function myProducts(){
+	public function myProducts()
+	{
 		$products = new ObjectModel();
 		$objects = $products->getObjectsByUserId($_SESSION['user_id']);
 		$name = new UserModel();
@@ -160,5 +166,4 @@ class PagesController
 			'page' => 'myProductsLists'
 		]);
 	}
-
 }
