@@ -31,7 +31,13 @@ $router->group('', function(Router $router) use ($app) {
 	});
 	$router->group('/products', function () use ($app, $router) {
 		$router->get('/lists', [ PagesController::class, 'products' ]);
-		$router->get('/exchange/confirm', [ PagesController::class, 'exchange']);
+		$router->group('/exchange', function () use ($app, $router) {
+			$router->get('/propose', [ PagesController::class, 'proposeExchange' ]);
+			$router->post('/accept/@id:[0-9]+', [ PagesController::class, 'acceptProposition' ]);
+			$router->post('/reject/@id:[0-9]+', [ PagesController::class, 'rejectProposition' ]);
+		});
+		//$router->get('/exchange/propose', [ PagesController::class, 'exchange']);
+		$router->get('/propositionLists', [ PagesController::class, 'propositionLists']);
 	});
 	$router->group('/categories', function () use ($app, $router) {
 		$router->get('/lists', [ PagesController::class, 'categories' ]);

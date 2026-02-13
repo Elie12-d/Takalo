@@ -103,7 +103,7 @@ class PagesController
 		$this->app->render('model', ['objects' => $objects, 'page' => 'productsLists']);
 	}
 
-	public function exchange()
+	public function proposeExchange()
 	{
 		$data = $this->app->request()->query;
 		$objectId1 = $data['requested_product_id'];
@@ -112,8 +112,8 @@ class PagesController
 		$idUser1 = $products->getUserIdById($objectId1);
 		$idUser2 = $products->getUserIdById($objectId2);
 		$result1 = $products->proposeExchange($idUser1, $idUser2, $objectId1, $objectId2);
-		$result2 = $products->exchangeObjects($objectId1, $objectId2);
-		if ($result1 && $result2) {
+		//$result2 = $products->exchangeObjects($objectId1, $objectId2);
+		if ($result1) {
 			header('Content-Type: application/json');
 			echo json_encode([
 				'success' => true,
@@ -121,6 +121,42 @@ class PagesController
 				'user2_id' => $idUser2,
 				'object1_id' => $objectId1,
 				'object2_id' => $objectId2
+			]);
+			exit;
+		} else {
+			header('Content-Type: application/json');
+			echo json_encode([
+				'success' => false
+			]);
+			exit;
+		}
+	}
+	public function acceptProposition($id)
+	{
+		$products = new ObjectModel();
+		$result = $products->acceptProposition($id);
+		if ($result) {
+			header('Content-Type: application/json');
+			echo json_encode([
+				'success' => true
+			]);
+			exit;
+		} else {
+			header('Content-Type: application/json');
+			echo json_encode([
+				'success' => false
+			]);
+			exit;
+		}
+	}
+	public function rejectProposition($id)
+	{
+		$products = new ObjectModel();
+		$result = $products->rejectProposition($id);
+		if ($result) {
+			header('Content-Type: application/json');
+			echo json_encode([
+				'success' => true
 			]);
 			exit;
 		} else {
@@ -165,5 +201,11 @@ class PagesController
 			'objects' => $objects,
 			'page' => 'myProductsLists'
 		]);
+	}
+	public function propositionLists()
+	{
+		$products = new ObjectModel();
+		$propositions = $products->getReceivedPropositions($_SESSION['user_id']);
+		$this->app->render('model', ['propositions' => $propositions, 'page' => 'propositionLists']);
 	}
 }

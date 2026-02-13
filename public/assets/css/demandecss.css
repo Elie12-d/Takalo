@@ -1,0 +1,49 @@
+body {
+    background: linear-gradient(135deg, #f8daeb, #d9d2f8, #c7e5f8);
+    min-height: 100vh;
+}
+
+.custom-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(150, 120, 255, 0.15);
+}
+
+.custom-header {
+    background: linear-gradient(90deg, #f472b6, #a78bfa, #05101d);
+    color: white;
+    border-radius: 15px;
+}
+
+table tbody tr:hover {
+    background-color: #f9f5ff;
+    transition: 0.3s;
+}
+
+.btn-accept {
+    background: linear-gradient(45deg, #25e0a8, #5da4e7);
+    border: none;
+    border-radius: 30px;
+    color: white;
+}
+
+.btn-accept:hover {
+    opacity: 0.85;
+}
+
+.btn-refuse {
+    background: linear-gradient(45deg, #c51818, #e67d7d);
+    border: none;
+    border-radius: 30px;
+    color: white;
+}
+
+.btn-refuse:hover {
+    opacity: 0.85;
+}
+
+h1 {
+    background: linear-gradient(90deg, #f36eb3, #9b7bfc, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

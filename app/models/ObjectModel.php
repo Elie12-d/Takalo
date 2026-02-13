@@ -98,10 +98,9 @@ class ObjectModel
         $stmt->execute([$id]);
         return $stmt->fetchColumn();
     }
-    public function exchangeObjects($objectId1, $objectId2){
+    public function exchangeObjects($objectId1, $objectId2)
+    {
         try {
-            $this->db->beginTransaction();
-
             // Récupérer les propriétaires
             $stmt = $this->db->prepare("SELECT user_id FROM objects WHERE id = ?");
             $stmt->execute([$objectId1]);
@@ -114,18 +113,89 @@ class ObjectModel
             $stmt = $this->db->prepare("UPDATE objects SET user_id = ? WHERE id = ?");
             $stmt->execute([$owner2, $objectId1]);
             $stmt->execute([$owner1, $objectId2]);
+            return true;
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+    public function getReceivedPropositions($userId)
+    {
+        $sql = "SELECT * FROM exchanges WHERE user1_id = ? AND status = 'pending'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll();
+    }
+    public function getPropositionsByUserId($userId)
+    {
+        $sql = "SELECT * FROM exchanges WHERE user2_id = ? AND status = 'pending'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll();
+    }
+    public function getAllPropositionsById($userId)
+    {
+        $sql = "SELECT * FROM exchanges WHERE user1_id = ? OR user2_id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$userId, $userId]);
+        return $stmt->fetchAll();
+    }
+    public function deleteObject($id)
+    {
+        $sql = "UPDATE objects SET status = 'inactive' WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([$id]);
+    }
+    public function updateObject($id, $name, $description, $categoryId)
+    {
+        $sql = "UPDATE objects SET name = ?, description = ?, category_id = ? WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([$name, $description, $categoryId, $id]);
+    }
+    public function addObject()
+    {
+        $sql = "INSERT INTO objects (name, description, user_id, category_id, published_date) VALUES (?, ?, ?, ?, NOW())";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([$this->name, $this->description, $this->userId, $this->categoryId]);
+    }
+    public function getObjectById($id)
+    {
+        $sql = "SELECT * FROM objects WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
+    public function acceptProposition($id)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            // Récupérer la proposition
+            $stmt = $this->db->prepare("SELECT * FROM exchanges WHERE id = ?");
+            $stmt->execute([$id]);
+            $proposition = $stmt->fetch();
+
+            if (!$proposition) {
+                throw new \Exception("Proposition not found");
+            }
+
+            // Échanger les objets
+            $this->exchangeObjects($proposition['object1_id'], $proposition['object2_id']);
+
+            // Mettre à jour le statut de la proposition
+            $stmt = $this->db->prepare("UPDATE exchanges SET status = 'accepted', responded_at = NOW() WHERE id = ?");
+            $stmt->execute([$id]);
 
             $this->db->commit();
             return true;
-        } catch (\PDOException $e) {
+        } catch (\Exception $e) {
             $this->db->rollBack();
             return false;
         }
     }
-    public function getAllPropositionsById($id) {
-        $sql = "SELECT * FROM exchanges WHERE user1_id = ? OR user2_id = ?";
+    public function rejectProposition($id)
+    {
+        $sql = "UPDATE exchanges SET status = 'rejected', responded_at = NOW() WHERE id = ?";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id, $id]);
-        return $stmt->fetchAll();
+        return $stmt->execute([$id]);
     }
 }

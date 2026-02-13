@@ -511,7 +511,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             
             // Envoi uniquement des IDs
-            fetch(`/products/exchange/confirm?requested_product_id=${currentProductId}&offered_product_id=${proposedProductId}`, {
+            fetch(`/products/exchange/propose?requested_product_id=${currentProductId}&offered_product_id=${proposedProductId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

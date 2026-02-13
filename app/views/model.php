@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/slick.css">
     <!--====== Default css ======-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/default.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/demandecss.css">
 
     <!--====== Style css ======-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
@@ -98,12 +99,12 @@
                                             data-bs-toggle="collapse" data-bs-target="#submenu-list2"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
                                             aria-label="Toggle navigation"></a>
-                                        <a href="<?= BASE_URL ?>/categories/lists">Listes des propositions</a>
+                                        <a href="<?= BASE_URL ?>/products/propositionLists">Listes des propositions</a>
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
                             <div class="button header-button">
-                                <a href="<?= BASE_URL ?>/logout" class="btn main-btn btn-inline">Log Out</a>
+                                <a href="<?= BASE_URL ?>/logout" class="btn">Log Out</a>
                             </div>
                         </nav> <!-- navbar -->
                     </div>
@@ -180,7 +181,8 @@
         'productsLists' => 'products.php',
         'exchange' => 'exchange.php',
         'categoriesLists' => 'categories.php',
-        'myProductsLists' => 'myProducts.php'
+        'myProductsLists' => 'myProducts.php',
+        'propositionLists' => 'propositionLists.php'
     ];
     if (isset($allowedPages[$page])) {
         $file = VIEWS_PATH . '/' . $allowedPages[$page];
